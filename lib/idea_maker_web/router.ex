@@ -14,6 +14,10 @@ defmodule IdeaMakerWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug IdeaMaker.AuthCheck
+  end
+
   scope "/", IdeaMakerWeb do
     pipe_through :browser
 
@@ -22,7 +26,7 @@ defmodule IdeaMakerWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api", IdeaMakerWeb do
-    pipe_through :api
+    pipe_through [:api, :auth]
 
     scope "/auth" do
       get "/", AuthController, :index

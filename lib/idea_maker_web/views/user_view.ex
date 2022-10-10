@@ -6,10 +6,13 @@ defmodule IdeaMakerWeb.UserView do
   end
 
   def render("error.json", data) do
-    Enum.map(data.message, fn x ->
-      x[_]
-    end)
+    data =
+      Enum.map(data.message, fn {k, v} ->
+        {message, _} = v
+        message
+      end)
 
+    IO.inspect(data)
     %{status: "error", message: data}
   end
 end
