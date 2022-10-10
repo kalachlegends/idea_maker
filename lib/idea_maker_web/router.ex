@@ -15,15 +15,21 @@ defmodule IdeaMakerWeb.Router do
   end
 
   scope "/", IdeaMakerWeb do
-    pipe_through :api
+    pipe_through :browser
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", IdeaMakerWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", IdeaMakerWeb do
+    pipe_through :api
+
+    scope "/auth" do
+      get "/", AuthController, :index
+      post "/me", AuthController, :auth_me
+      post "/register", UserController, :register
+    end
+  end
 
   # Enables LiveDashboard only for development
   #

@@ -1,0 +1,12 @@
+Create User table
+-----------------
+mix phx.gen.schema User user email:string:unique password:string data:map 
+
+Create Group Table
+---------
+mix phx.gen.schema Group group title:string user_id:references:user user_ids:array:integer idea_ids:array:integer
+
+Create Idea Table 
+---------------------
+
+ mix phx.gen.schema Idea idea title:string user_id:references:user group_id:references:group name:string content:string data:map
