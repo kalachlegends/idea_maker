@@ -31,6 +31,7 @@ defmodule IdeaMakerWeb.Router do
     scope "/auth" do
       get "/", AuthController, :index
       post "/me", AuthController, :auth_me
+      post "/login", UserController, :login
       post "/register", UserController, :register
     end
   end
