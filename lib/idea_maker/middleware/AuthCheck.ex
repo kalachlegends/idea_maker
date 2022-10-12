@@ -3,7 +3,17 @@ defmodule IdeaMaker.AuthCheck do
 
   def init(options), do: options
 
-  def call(conn, _opts) do
+  def get_token(conn) do
+    auth = get_req_header(conn, "authorization")
+
+    token =
+      hd(auth)
+      |> String.replace("Bearer ", "")
+
+    {:ok, token}
+  end
+
+  def call(conn, _opts \\ %{}) do
     auth = get_req_header(conn, "authorization")
 
     if auth != [] do
