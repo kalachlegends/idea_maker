@@ -24,13 +24,21 @@ defmodule IdeaMakerWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
   scope "/api", IdeaMakerWeb do
     pipe_through [:api, :auth]
 
+    get "/", AuthController, :index
+
     scope "/auth" do
-      get "/", AuthController, :index
       get "/me", AuthController, :auth_me
+    end
+  end
+
+  # Other scopes may use custom stacks.
+  scope "/api", IdeaMakerWeb do
+    pipe_through [:api]
+
+    scope "/auth" do
       post "/login", UserController, :login
       post "/register", UserController, :register
     end
