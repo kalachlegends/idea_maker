@@ -3,6 +3,7 @@ defmodule IdeaMaker.Repo.Migrations.CreateUser do
 
   def change do
     create table(:user) do
+      add :login, :string
       add :email, :string
       add :password, :string
       add :data, :map
@@ -11,5 +12,6 @@ defmodule IdeaMaker.Repo.Migrations.CreateUser do
     end
 
     create unique_index(:user, [:email])
+    create unique_index(:user, [:login])
   end
 end

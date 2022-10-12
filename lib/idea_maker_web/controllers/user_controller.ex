@@ -3,7 +3,12 @@ defmodule IdeaMakerWeb.UserController do
   alias IdeaMaker.{Repo, User, Data, Service}
 
   def register(conn, params) do
-    case Service.User.register(params["email"], params["password"], params["data"]) do
+    case Service.User.register(
+           params["email"],
+           params["password"],
+           params["data"],
+           params["login"]
+         ) do
       {:ok, struct, token} ->
         render(conn, "login.json", user: struct, token: token)
 
