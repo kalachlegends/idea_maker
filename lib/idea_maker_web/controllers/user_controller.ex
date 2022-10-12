@@ -6,8 +6,8 @@ defmodule IdeaMakerWeb.UserController do
     case Service.User.register(
            params["email"],
            params["password"],
-           params["data"],
-           params["login"]
+           params["login"],
+           params["data"]
          ) do
       {:ok, struct, token} ->
         render(conn, "login.json", user: struct, token: token)

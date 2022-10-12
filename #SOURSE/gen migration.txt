@@ -1,6 +1,6 @@
 Create User table
 -----------------
-mix phx.gen.schema User user email:string:unique password:string data:map 
+mix phx.gen.schema User user login:string:unique email:string:unique password:string data:map 
 
 Create Group Table
 ---------

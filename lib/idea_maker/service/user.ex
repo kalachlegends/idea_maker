@@ -2,12 +2,12 @@ defmodule IdeaMaker.Service.User do
   import Ecto.Query
   alias IdeaMaker.{Repo, User, Data}
 
-  def login(email, password \\ "") do
+  def login(login, password \\ "") do
     password = IdeaMaker.hash(password)
 
     query =
       from user in User,
-        where: user.email == ^email and user.password == ^password
+        where: user.login == ^login and user.password == ^password
 
     user = Repo.one(query)
 
@@ -24,12 +24,18 @@ defmodule IdeaMaker.Service.User do
     end
   end
 
-  def register(email, password, _data) do
+  def register(email, password, login, _data) do
     case Repo.insert(
-           User.changeset(%User{}, %{email: email, password: password, data: Data.user()})
+           User.changeset(%User{}, %{
+             email: email,
+             login: login,
+             password: password,
+             data: Data.user()
+           })
          ) do
       {:ok, struct} ->
         token = IdeaMaker.Token.generate_and_sign!(%{"user_id" => struct.id})
+
         user =
           IdeaMaker.normalize_repo(struct)
           |> Map.delete(:password)
