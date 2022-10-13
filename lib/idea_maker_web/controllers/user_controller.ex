@@ -1,6 +1,6 @@
 defmodule IdeaMakerWeb.UserController do
   use IdeaMakerWeb, :controller
-  alias IdeaMaker.{Repo, User, Data, Service}
+  alias IdeaMaker.{Repo, User, Data, Service, Db}
 
   def register(conn, params) do
     case Service.User.register(
@@ -29,7 +29,11 @@ defmodule IdeaMakerWeb.UserController do
         |> resp(406, "Err")
         |> render("error.json", message: message)
     end
+  end
 
-    render(conn, "index.json")
+  def search_login(conn, params) do
+    list = Service.User.search_by_login(params["login"])
+
+    render(conn, "users.json", users: list)
   end
 end

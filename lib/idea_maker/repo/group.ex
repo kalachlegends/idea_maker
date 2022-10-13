@@ -14,7 +14,7 @@ defmodule IdeaMaker.Group do
   @doc false
   def changeset(group, attrs) do
     group
-    |> cast(attrs, [:title, :user_ids, :idea_ids])
-    |> validate_required([:title, :user_ids, :idea_ids])
+    |> cast(attrs, [:title, :user_ids, :idea_ids, :user_id])
+    |> validate_required([:title, :user_ids, :idea_ids, :user_id])
   end
 end

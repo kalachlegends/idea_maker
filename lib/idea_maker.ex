@@ -3,4 +3,6 @@ defmodule IdeaMaker do
 
   def normalize_repo(struct),
     do: Map.from_struct(struct) |> Map.delete(:__meta__) |> Map.delete(:password)
+
+  def nomalize_list_by_repo(list), do: list |> Enum.map(fn x -> normalize_repo(x) end)
 end

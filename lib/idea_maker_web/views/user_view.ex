@@ -9,4 +9,8 @@ defmodule IdeaMakerWeb.UserView do
   def render("error.json", data) do
     error_message(data.message)
   end
+
+  def render("users.json", data) do
+    %{status: "ok", users: data.users}
+  end
 end

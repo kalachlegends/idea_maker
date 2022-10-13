@@ -1,6 +1,6 @@
 defmodule IdeaMaker.Service.User do
   import Ecto.Query
-  alias IdeaMaker.{Repo, User, Data}
+  alias IdeaMaker.{Repo, User, Data, Db}
 
   def login(login, password \\ "") do
     password = IdeaMaker.hash(password)
@@ -28,8 +28,8 @@ defmodule IdeaMaker.Service.User do
     case Repo.insert(
            User.changeset(%User{}, %{
              email: email,
-             login: login,
              password: password,
+             login: login,
              data: Data.user()
            })
          ) do
@@ -45,5 +45,27 @@ defmodule IdeaMaker.Service.User do
       {:error, changeset} ->
         {:error, changeset}
     end
+  end
+
+  def get_user_by_token(conn) do
+    with {:ok, token} <- IdeaMaker.AuthCheck.get_token(conn),
+         {:ok, claims} <- IdeaMaker.Token.verify_and_validate(token),
+         {:ok, user} <- Db.get(User, claims["user_id"]) do
+      {:ok, user}
+    else
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
+
+  def search_by_login(login) do
+    login = "#{login}%"
+
+    from(
+      user in User,
+      where: like(user.login, ^login)
+    )
+    |> Repo.all([])
+    |> IdeaMaker.nomalize_list_by_repo()
   end
 end
