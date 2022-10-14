@@ -24,6 +24,7 @@ defmodule IdeaMakerWeb.Router do
     get "/", PageController, :index
   end
 
+
   scope "/api", IdeaMakerWeb do
     pipe_through [:api, :auth]
 
@@ -31,6 +32,8 @@ defmodule IdeaMakerWeb.Router do
 
     scope "/groups" do
       get "/", GroupController, :get_by_user_id
+      get "/:id", GroupController, :get_by_id
+      post "/:id", GroupController, :add_user
       post "/", GroupController, :create
     end
 

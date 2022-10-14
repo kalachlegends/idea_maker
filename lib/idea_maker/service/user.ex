@@ -68,4 +68,13 @@ defmodule IdeaMaker.Service.User do
     |> Repo.all([])
     |> IdeaMaker.nomalize_list_by_repo()
   end
+
+  def get_all_users_by_list(list) do
+    from(
+      user in User,
+      where: user.id in ^list
+    )
+    |> Repo.all([])
+    |> IdeaMaker.nomalize_list_by_repo()
+  end
 end
