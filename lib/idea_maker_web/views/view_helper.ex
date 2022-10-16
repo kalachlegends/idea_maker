@@ -3,9 +3,9 @@ defmodule IdeaMakerWeb.ViewHelper do
     message =
       cond do
         is_list(message) ->
-          Enum.map(message, fn {_k, v} ->
+          Enum.map(message, fn {k, v} ->
             {message, _} = v
-            message
+            %{"#{k}" => message}
           end)
 
         true ->

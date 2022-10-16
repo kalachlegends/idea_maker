@@ -14,9 +14,7 @@ defmodule IdeaMaker.Service.User do
     if !is_nil(user) do
       token = IdeaMaker.Token.generate_and_sign!(%{"user_id" => user.id})
 
-      user =
-        IdeaMaker.normalize_repo(user)
-        |> Map.delete(:password)
+      user = IdeaMaker.normalize_repo(user)
 
       {:ok, user, token}
     else
@@ -36,9 +34,7 @@ defmodule IdeaMaker.Service.User do
       {:ok, struct} ->
         token = IdeaMaker.Token.generate_and_sign!(%{"user_id" => struct.id})
 
-        user =
-          IdeaMaker.normalize_repo(struct)
-          |> Map.delete(:password)
+        user = IdeaMaker.normalize_repo(struct)
 
         {:ok, user, token}
 

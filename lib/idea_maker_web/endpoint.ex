@@ -9,7 +9,7 @@ defmodule IdeaMakerWeb.Endpoint do
     key: "_idea_maker_key",
     signing_salt: "6m2MjgzE"
   ]
-
+  plug CORSPlug
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   socket "/socket", IdeaMakerWeb.UserSocket,

@@ -11,6 +11,7 @@ defmodule IdeaMakerWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: ["http://localhost:3000"]
     plug :accepts, ["json"]
   end
 
@@ -23,7 +24,6 @@ defmodule IdeaMakerWeb.Router do
 
     get "/", PageController, :index
   end
-
 
   scope "/api", IdeaMakerWeb do
     pipe_through [:api, :auth]

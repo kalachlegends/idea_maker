@@ -20,10 +20,10 @@ defmodule IdeaMakerWeb.RoomChannel do
     {:noreply, socket}
   end
 
-  def handle_info(:ping, socket) do
-    push(socket, "new:msg", %{user: "SYSTEM", body: "ping"})
-    {:noreply, socket}
-  end
+  # def handle_info(:ping, socket) do
+  #   push(socket, "new:msg", %{user: "SYSTEM", body: "ping"})
+  #   {:noreply, socket}
+  # end
 
   def terminate(reason, _socket) do
     Logger.debug("> leave #{inspect(reason)}")
@@ -31,7 +31,7 @@ defmodule IdeaMakerWeb.RoomChannel do
   end
 
   def handle_in("new:msg", msg, socket) do
-    broadcast!(socket, "new:msg", %{body: msg["body"]})
+    broadcast!(socket, "new:msg", %{body: msg["body"], user: msg["user"]})
     {:reply, {:ok, %{msg: msg["body"]}}, assign(socket, :user, msg["user"])}
   end
 end
