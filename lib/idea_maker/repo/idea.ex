@@ -16,7 +16,7 @@ defmodule IdeaMaker.Idea do
   @doc false
   def changeset(idea, attrs) do
     idea
-    |> cast(attrs, [:title, :name, :content, :data])
-    |> validate_required([:title, :name, :content, :data])
+    |> cast(attrs, [:title, :name, :content, :data, :user_id, :group_id])
+    |> validate_required([:title, :name, :content, :data, :user_id, :group_id])
   end
 end

@@ -22,11 +22,12 @@ defmodule IdeaMaker.Service.User do
     end
   end
 
-  def register(email, password, login, _data) do
+  def register(email, password, repassword, login, _data) do
     case Repo.insert(
            User.changeset(%User{}, %{
              email: email,
              password: password,
+             repassword: repassword,
              login: login,
              data: Data.user()
            })
