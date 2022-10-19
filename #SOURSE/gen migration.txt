@@ -3,10 +3,21 @@ Create User table
 mix phx.gen.schema User user login:string:unique email:string:unique password:string data:map 
 
 Create Group Table
----------
+-----------
 mix phx.gen.schema Group group title:string user_id:references:user user_ids:array:integer idea_ids:array:integer
 
 Create Idea Table 
 ---------------------
+mix phx.gen.schema Idea idea title:string user_id:references:user group_id:references:group name:string content:string data:map
 
- mix phx.gen.schema Idea idea title:string user_id:references:user group_id:references:group name:string content:string data:map
+Create Post Table 
+---------------------
+mix phx.gen.schema Post post title:string user_id:references:user content:string type:smallint url_images:string
+
+Create GroupPost Table 
+----------------------
+mix phx.gen.schema Group_Post group_post title:string group_id:references:group content:string type:smallint url_images:string
+
+Create Chat Table 
+----------------------
+mix phx.gen.schema Chat chat user_id_one:references:user user_id_two:references:user messages_one:array:string messages_two:array:string

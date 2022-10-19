@@ -19,7 +19,7 @@ config :idea_maker, IdeaMaker.Repo,
 config :idea_maker, IdeaMakerWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {192, 168, 0, 114}, port: 10606],
+  http: [ip: {192, 168, 0, 126}, port: 10606],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
