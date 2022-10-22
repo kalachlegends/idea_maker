@@ -27,6 +27,13 @@ defmodule ChangesetHelper do
     )
   end
 
+  def link_check(%Ecto.Changeset{} = changeset, field) when is_atom(field) do
+    changeset
+    |> validate_format(field, ~r/^(?<user>[^\s]+)@(?<domain>[^\s]+\.[^\s]+)$/,
+      message: "link_not_valid"
+    )
+  end
+
   def password_check(
         %Ecto.Changeset{changes: changes} = changeset,
         field,
@@ -117,4 +124,6 @@ defmodule ChangesetHelper do
         valid?: false
     }
   end
+
+  
 end

@@ -52,7 +52,8 @@ defmodule IdeaMaker.MixProject do
       {:joken, "~> 2.5"},
       {:crud, "~> 1.0.6"},
       {:cors_plug, "~> 3.0"},
-      {:corsica, "~> 1.0"}
+      {:corsica, "~> 1.0"},
+      {:ecto_commons, "~> 0.3.3"}
       # {:bcrypt_elixir, "~> 3.0.1"}
     ]
   end

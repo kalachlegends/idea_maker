@@ -5,7 +5,8 @@ defmodule IdeaMaker.Group_Post do
   schema "group_post" do
     field :content, :string
     field :title, :string
-    field :url_images, :string
+    field :description, :string
+    field :url_img, :string
     field :group_id, :id
 
     timestamps()
@@ -14,7 +15,7 @@ defmodule IdeaMaker.Group_Post do
   @doc false
   def changeset(group__post, attrs) do
     group__post
-    |> cast(attrs, [:title, :content, :url_images])
-    |> validate_required([:title, :content, :url_images])
+    |> cast(attrs, [:title, :content, :url_images, :url_img, :description])
+    |> validate_required([:title, :content, :url_images, :url_img, :description])
   end
 end

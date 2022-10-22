@@ -5,8 +5,8 @@ defmodule IdeaMaker.Repo.Migrations.CreatePost do
     create table(:post) do
       add :title, :string
       add :content, :string
-      add :type, :integer
-      add :url_images, :string
+      add :description, :string
+      add :url_img, :string
       add :user_id, references(:user, on_delete: :nothing)
 
       timestamps()

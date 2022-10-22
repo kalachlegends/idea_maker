@@ -30,6 +30,11 @@ defmodule IdeaMakerWeb.Router do
 
     get "/", AuthController, :index
 
+    scope "/post" do
+      post "/", PostController, :create
+      delete "/:id", PostController, :remove
+    end
+
     scope "/groups" do
       get "/", GroupController, :get_by_user_id
       get "/:id", GroupController, :get_by_id
@@ -49,6 +54,12 @@ defmodule IdeaMakerWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", IdeaMakerWeb do
     pipe_through [:api]
+
+    scope "/post" do
+      get "/", PostController, :get_all
+      get "/:id", PostController, :show
+      get "/user/:id", PostController, :get_all_by_user_id
+    end
 
     scope "/auth" do
       post "/login", UserController, :login

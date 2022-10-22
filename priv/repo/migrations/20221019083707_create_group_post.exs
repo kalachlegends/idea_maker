@@ -5,7 +5,8 @@ defmodule IdeaMaker.Repo.Migrations.CreateGroupPost do
     create table(:group_post) do
       add :title, :string
       add :content, :string
-      add :url_images, :string
+      add :description, :string
+      add :url_img, :string
       add :group_id, references(:group, on_delete: :nothing)
 
       timestamps()
